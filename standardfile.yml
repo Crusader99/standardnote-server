@@ -6,7 +6,7 @@
 # An additional parameter can be added to define custom unix permissions `socket_mode: 0660`.
 
 # Address to bind
-address: "localhost:5000"
+address: "0.0.0.0:5000"
 # Disable registration
 no_registration: false
 # Show real version in `GET /version'

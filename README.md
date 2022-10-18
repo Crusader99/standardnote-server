@@ -14,7 +14,7 @@ This server implementation is built with Go and can be deployed in seconds:
 
 - git clone https://github.com/Crusader99/standardnote-server.git
 - cd standardnote-server
-- docker run -p 8080:5000 -v ./standardfile.yml:/etc/standardfile/standardfile.yml:z -it $(docker build -q .)
+- docker run -p 5000:5000 -v ./standardfile.yml:/etc/standardfile/standardfile.yml:z -it $(docker build -q .)
 
 ### Technologies / Frameworks
 
