@@ -1,4 +1,4 @@
-# Yet Another Standardfile Implementation in Go
+# Standardfile Implementation in Go
 
 [![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg)](https://pkg.go.dev/github.com/mdouchement/standardfile)
 [![Go Report Card](https://goreportcard.com/badge/github.com/mdouchement/standardfile)](https://goreportcard.com/report/github.com/mdouchement/standardfile)
@@ -10,32 +10,15 @@ This is a 100% Golang implementation of the [Standard Notes](https://docs.standa
 
 You can run your own Standard File server, and use it with any SF compatible client (like Standard Notes).
 This allows you to have 100% control of your data.
-This server implementation is built with Go and can be deployed in seconds.
+This server implementation is built with Go and can be deployed in seconds:
 
-https://hub.docker.com/r/mdouchement/standardfile
-
-### Client library
-
-Go to `pgk/libsf` for more details.
-https://godoc.org/github.com/mdouchement/standardfile/pkg/libsf
-
-It is an alternative to https://github.com/jonhadfield/gosn
-
-### SF client
-
-```sh
-go run cmd/sfc/main.go -h
-```
-
-Terminal UI client:
-![sfc note](https://user-images.githubusercontent.com/6150317/62490536-c997f780-b7c9-11e9-867a-bc619d286b31.png)
-
-## Requirements
-
-- Golang 1.16.x (Go Modules)
+- git clone https://github.com/Crusader99/standardnote-server.git
+- cd standardnote-server
+- docker run -it $(docker build -q .)
 
 ### Technologies / Frameworks
 
+- Golang 1.16.x (Go Modules)
 - [Cobra](https://github.com/spf13/cobra)
 - [Echo](https://github.com/labstack/echo)
 - [BoltDB](https://github.com/etcd-io/bbolt) + [Storm](https://github.com/asdine/storm) Toolkit
@@ -87,12 +70,12 @@ This feature is pretty undocumented and I feel uncomfortable about the outgoing 
 
 </details>
 
-## Not implemented (yet)
+## Not working yet
 
+- [Note revisions](https://github.com/mdouchement/standardfile/issues/31)
+- [Integrity check](https://github.com/mdouchement/standardfile/issues/75)
 - **2FA** (aka `verify_mfa`)
-- Postgres if a more stronger database is needed
-- A console for admin usage
-
+- Password change
 
 ## License
 
