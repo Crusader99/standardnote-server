@@ -79,6 +79,7 @@ This feature is pretty undocumented and I feel uncomfortable about the outgoing 
 ## Differences with repository from mdouchement
 
 - Mail and password change working with current StandardNotes version
+- Provides subscription premium features
 
 ## License
 
