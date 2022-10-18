@@ -78,7 +78,7 @@ This feature is pretty undocumented and I feel uncomfortable about the outgoing 
 
 ## Differences with repository from mdouchement
 
-- E-Mail and Password change working with current StandardNotes version
+- Mail and password change working with current StandardNotes version
 
 ## License
 
