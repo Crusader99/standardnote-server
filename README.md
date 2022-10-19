@@ -94,4 +94,4 @@ All PRs are welcome.
 
 ## License
 
-**MIT**
+[MIT](https://github.com/Crusader99/standardnote-server/blob/master/LICENSE)
