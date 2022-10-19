@@ -74,12 +74,12 @@ This feature is pretty undocumented and I feel uncomfortable about the outgoing 
 
 - [Note revisions](https://github.com/mdouchement/standardfile/issues/31)
 - [Integrity check](https://github.com/mdouchement/standardfile/issues/75)
-- **2FA** (aka `verify_mfa`)
 
 ## Differences with repository from mdouchement
 
 - Mail and password change working with current StandardNotes version
 - Provides subscription premium features
+- **2FA** (aka `verify_mfa`) implemented
 
 ## License
 
