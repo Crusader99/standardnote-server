@@ -12,6 +12,7 @@ import (
 	"github.com/mdouchement/standardfile/internal/server/session"
 	"github.com/mdouchement/standardfile/internal/sferror"
 	"github.com/mdouchement/standardfile/pkg/libsf"
+	"github.com/pquerna/otp/totp"
 )
 
 // auth contains all authentication handlers.
@@ -91,6 +92,29 @@ func (h *auth) ParamsPKCE(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, sferror.New("Please provide the code challenge parameter"))
 	}
 
+	user, err := h.db.FindUserByMail(params.Email)
+	if err == nil && user != nil && user.MultiFactorSecret != "" {
+
+		if params.MfaCode == "" {
+			return c.JSON(http.StatusUnauthorized, echo.Map{
+				"meta": echo.Map{
+					"auth": echo.Map{},
+				},
+				"data": echo.Map{
+					"error": echo.Map{
+						"tag":     "mfa-required",
+						"message": "Please enter your two-factor authentication code.",
+						"payload": echo.Map{
+							"mfa_key": "mfa_code",
+						},
+					},
+				},
+			})
+		} else if !totp.Validate(params.MfaCode, user.MultiFactorSecret) {
+			return c.JSON(http.StatusBadRequest, sferror.New("Multifaktor authentication failed"))
+		}
+	}
+
 	pkce := service.NewPKCE(h.db, params.Params)
 
 	if err := pkce.StoreChallenge(params.CodeChallenge); err != nil {
@@ -112,9 +136,6 @@ func (h *auth) params(c echo.Context, email string) error {
 			"version":    libsf.ProtocolVersion4,
 		})
 	}
-
-	// TODO 2FA
-	// https://github.com/standardfile/ruby-server/blob/master/app/controllers/api/auth_controller.rb#L16
 
 	// Render
 	params := echo.Map{

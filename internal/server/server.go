@@ -153,6 +153,15 @@ func EchoEngine(ctrl Controller) *echo.Echo {
 	v1restricted.GET("/users/:id/subscription", subscription.SubscriptionV1)
 	v1restricted.GET("/users/:id/features", subscription.Features)
 
+	//
+	// multi factor authentification
+	//
+	auth_multi_factor := &auth_multi_factor{
+		db: ctrl.Database,
+	}
+	v1restricted.PUT("/users/:id/settings", auth_multi_factor.EnableMFA)
+	v1restricted.GET("/users/:id/settings/mfa_secret", auth_multi_factor.CheckHasEnabledMFA)
+
 	return engine
 }
 

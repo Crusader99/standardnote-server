@@ -44,6 +44,7 @@ type (
 		Password      string `json:"password"`
 		CodeChallenge string `json:"code_challenge"`
 		CodeVerifier  string `json:"code_verifier"`
+		MfaCode       string `json:"mfa_code"`
 	}
 
 	// UpdateUserParams are used to update a user.
