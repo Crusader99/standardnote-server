@@ -1,4 +1,4 @@
-# Standardfile Implementation in Go
+# Lightweight StandardNotes Server
 
 [![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg)](https://pkg.go.dev/github.com/mdouchement/standardfile)
 [![Go Report Card](https://goreportcard.com/badge/github.com/mdouchement/standardfile)](https://goreportcard.com/report/github.com/mdouchement/standardfile)
@@ -12,48 +12,47 @@ You can run your own Standard File server, and use it with any SF compatible cli
 This allows you to have 100% control of your data.
 This server implementation is built with Go and can be deployed in seconds:
 
-- git clone https://github.com/Crusader99/standardnote-server.git
-- cd standardnote-server
-- docker run -p 5000:5000 -v ./standardfile.yml:/etc/standardfile/standardfile.yml:z -it $(docker build -q .)
+- `git clone https://github.com/Crusader99/standardnote-server.git`
+- `cd standardnote-server`
+- `docker-compose up`
+
+<details>
+<summary>Running without docker-compose is also possible</summary>
+
+`docker run -p 5000:5000 -v ./db:/etc/standardfile/database:z -v ./standardfile.yml:/etc/standardfile/standardfile.yml:z -it $(docker build -q .)`
+
+</details>
 
 ### Technologies / Frameworks
 
-- Golang 1.16.x (Go Modules)
+- [Golang](https://go.dev/)
 - [Cobra](https://github.com/spf13/cobra)
 - [Echo](https://github.com/labstack/echo)
 - [BoltDB](https://github.com/etcd-io/bbolt) + [Storm](https://github.com/asdine/storm) Toolkit
 - [Gowid](https://github.com/gcla/gowid)
+- [OTP](https://github.com/pquerna/otp)
 
 
 ## Differences with reference implementation
 
 <details>
-<summary>Drop legacy support for clients which hardcoded the "api" path to the base url (iOS)</summary>
-
-> [Permalink](https://github.com/standardfile/ruby-server/blob/0a48c2625afc21966b110e0f73a1ff7bd212dbf4/config/routes.rb#L19-L26)
-
-</details>
-
-<details>
 <summary>Drop the POST request done on Extensions (backups too)</summary>
 
-> [Permalink](https://github.com/standardfile/ruby-server/blob/09b2020313a54668b7c6c0e122bbc8a530767d06/app/controllers/api/items_controller.rb#L20-L45)
-
-This feature is pretty undocumented and I feel uncomfortable about the outgoing traffic from my server on unknown URLs.
+> This feature is pretty undocumented and I feel uncomfortable about the outgoing traffic from my server on unknown URLs.
 
 </details>
 
 <details>
 <summary>Drop V1 support</summary>
 
-> [All stuff used in v1 and not in v2 nor v3](https://github.com/standardfile/standardfile.github.io/blob/master/doc/spec-001.md)
+> All stuff used in v1 and not in v2 nor v3
 
 </details>
 
 <details>
 <summary>JWT revocation strategy after password update</summary>
 
-> Reference implementation use a [pw_hash](https://github.com/standardfile/ruby-server/blob/0a48c2625afc21966b110e0f73a1ff7bd212dbf4/app/controllers/api/api_controller.rb#L37-L43) claim to check if the user has changed their pw and thus forbid them from access if they have an old jwt.
+> Reference implementation use a pw_hash claim to check if the user has changed their pw and thus forbid them from access if they have an old jwt.
 
 <hr>
 
@@ -70,21 +69,18 @@ This feature is pretty undocumented and I feel uncomfortable about the outgoing 
 
 </details>
 
+## Differences to repository from mdouchement
+
+- Mail and password change fixed for lastest StandardNotes
+- Provides **subscription** premium features out of the box
+- **2FA** (aka `verify_mfa`) implemented using [OTP-Library](https://github.com/pquerna/otp)
+
+These features will be merged in mdouchement's repo when pull requests accepted.
+
 ## Not working yet
 
 - [Note revisions](https://github.com/mdouchement/standardfile/issues/31)
 - [Integrity check](https://github.com/mdouchement/standardfile/issues/75)
-
-## Differences with repository from mdouchement
-
-- Mail and password change working with current StandardNotes version
-- Provides subscription premium features
-- **2FA** (aka `verify_mfa`) implemented
-
-## License
-
-**MIT**
-
 
 ## Contributing
 
@@ -95,3 +91,7 @@ All PRs are welcome.
 3. Commit your changes (git commit -am 'Add some feature')
 5. Push to the branch (git push origin my-new-feature)
 6. Create new Pull Request
+
+## License
+
+**MIT**
