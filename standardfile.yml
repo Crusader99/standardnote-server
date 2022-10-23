@@ -22,7 +22,7 @@ no_registration: false
 #
 # This project https://github.com/mdouchement/standardfile does not intend to
 # conflict with the business model of StandardNotes project or seek compensation.
-enable_subscriptions: false
+enable_subscriptions: true
 
 # Show real version in `GET /version'
 show_real_version: false
