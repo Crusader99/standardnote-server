@@ -170,6 +170,7 @@ var (
 				Version:                    version,
 				Database:                   db,
 				NoRegistration:             konf.Bool("no_registration"),
+				EnableSubscriptions:        konf.Bool("enable_subscriptions"),
 				ShowRealVersion:            konf.Bool("show_real_version"),
 				SigningKey:                 configSecretKey,
 				SessionSecret:              kdf(32, configSessionSecret),
