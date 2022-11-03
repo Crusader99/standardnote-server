@@ -81,7 +81,7 @@ func kdf(l int, k []byte) []byte {
 	return payload
 }
 
-/// keyFromConfig reads a key from the configuration, and if it's not present, tries to read it from a file instead
+// keyFromConfig reads a key from the configuration, and if it's not present, tries to read it from a file instead
 func keyFromConfig(konf *koanf.Koanf, path string) (out []byte, err error) {
 	// check if the key is directly placed in the config file
 	out = konf.Bytes(path)
@@ -170,8 +170,8 @@ var (
 				Version:                    version,
 				Database:                   db,
 				NoRegistration:             konf.Bool("no_registration"),
-				EnableSubscriptions:        konf.Bool("enable_subscriptions"),
 				ShowRealVersion:            konf.Bool("show_real_version"),
+				EnableSubscription:         konf.Bool("enable_subscription"),
 				SigningKey:                 configSecretKey,
 				SessionSecret:              kdf(32, configSessionSecret),
 				AccessTokenExpirationTime:  konf.MustDuration("session.access_token_ttl"),

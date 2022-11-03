@@ -16,11 +16,11 @@ import (
 
 // A Controller is an Iversion Of Control pattern used to init the server package.
 type Controller struct {
-	Version             string
-	Database            database.Client
-	NoRegistration      bool
-	EnableSubscriptions bool
-	ShowRealVersion     bool
+	Version            string
+	Database           database.Client
+	NoRegistration     bool
+	ShowRealVersion    bool
+	EnableSubscription bool
 	// JWT params
 	SigningKey []byte
 	// Session params
@@ -109,6 +109,7 @@ func EchoEngine(ctrl Controller) *echo.Echo {
 	v1.GET("/login-params", auth.Params)
 	v1.POST("/login", auth.Login)
 	v1restricted.POST("/logout", auth.Logout)
+	v1restricted.PUT("/users/:id/attributes/credentials", auth.UpdatePassword)
 
 	// TODO: GET    /auth/methods
 	// TODO: GET    /v1/users/:id/params => currentuser auth.Params
@@ -162,9 +163,18 @@ func EchoEngine(ctrl Controller) *echo.Echo {
 	v1.GET("/files", files.Download)
 
 	//
+	// multi factor authentification
+	//
+	auth_multi_factor := &auth_multi_factor{
+		db: ctrl.Database,
+	}
+	v1restricted.PUT("/users/:id/settings", auth_multi_factor.EnableMFA)
+	v1restricted.GET("/users/:id/settings/mfa_secret", auth_multi_factor.CheckHasEnabledMFA)
+
+	//
 	// subscription handlers
 	//
-	if ctrl.EnableSubscriptions {
+	if ctrl.EnableSubscription {
 		subscription := &subscription{}
 		router.GET("/v2/subscriptions", func(c echo.Context) error {
 			return c.HTML(http.StatusInternalServerError, "getaddrinfo EAI_AGAIN payments")
@@ -177,15 +187,6 @@ func EchoEngine(ctrl Controller) *echo.Echo {
 		fmt.Println("You can change this behaviour in your configuration file.")
 		fmt.Println()
 	}
-
-	//
-	// multi factor authentification
-	//
-	auth_multi_factor := &auth_multi_factor{
-		db: ctrl.Database,
-	}
-	v1restricted.PUT("/users/:id/settings", auth_multi_factor.EnableMFA)
-	v1restricted.GET("/users/:id/settings/mfa_secret", auth_multi_factor.CheckHasEnabledMFA)
 
 	return engine
 }
