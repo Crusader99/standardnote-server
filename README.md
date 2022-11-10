@@ -33,7 +33,7 @@ This server implementation is built with Go and can be deployed in seconds:
 - [OTP](https://github.com/pquerna/otp)
 
 
-## Differences with reference implementation
+## Differences from reference implementation
 
 <details>
 <summary>Drop the POST request done on Extensions (backups too)</summary>
@@ -71,36 +71,30 @@ This server implementation is built with Go and can be deployed in seconds:
 
 ## Differences to repository from mdouchement
 
-<details>
-<summary>Mail and password change fixed for lastest StandardNotes</summary>
-Compatible with StandardNotes client version 3.77.1.
-</details>
 
-<details>
-<summary>Provides **subscription** premium features out of the box</summary>
+* Provides **subscription** premium features out of the box:
+```
+This option enables paid features in the official StandardNotes client.
+If you want to enables these features, you should consider to
+donate to the StandardNotes project as they say:
 
-> This option enables paid features in the official StandardNotes client.
-> If you want to enables these features, you should consider to
-> donate to the StandardNotes project as they say:
->
-> Building Standard Notes has high costs. If everyone evaded contributing financially,
-> we would no longer be here to continue to build upon and improve these services for you.
-> Please consider [donating](https://standardnotes.com/donate) if you do not plan on purchasing a subscription.
-> https://docs.standardnotes.com/self-hosting/subscriptions/
-> 
-> This project https://github.com/mdouchement/standardfile does not intend to
-> conflict with the business model of StandardNotes project or seek compensation.
+Building Standard Notes has high costs. If everyone evaded contributing financially,
+we would no longer be here to continue to build upon and improve these services for you.
+Please consider donating to https://standardnotes.com/donate if you do not plan on purchasing a subscription.
+https://docs.standardnotes.com/self-hosting/subscriptions/
 
-</details>
+This project https://github.com/mdouchement/standardfile does not intend to
+conflict with the business model of StandardNotes project or seek compensation.
+```
 
-<details>
-<summary>**2FA** (aka `verify_mfa`) implemented using [OTP-Library](https://github.com/pquerna/otp)</summary>
+* **2FA** (aka `verify_mfa`) implemented using [OTP-Library](https://github.com/pquerna/otp):
+```
+Requires enable_subscriptions=true in configuration file.
+```
 
-> Requires enable_subscriptions=true in configuration file.
+* Experimental support for encrypted **file upload/download**: Current state is tracked in [#93](https://github.com/mdouchement/standardfile/pull/93)
 
-</details>
-
-These features will be merged in mdouchement's repo when pull requests accepted.
+These features will be merged in [mdouchement's repository](https://github.com/mdouchement/standardfile) when pull requests accepted.
 
 ## Not working yet
 
@@ -114,8 +108,8 @@ All PRs are welcome.
 1. Fork it
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
-5. Push to the branch (git push origin my-new-feature)
-6. Create new Pull Request
+4. Push to the branch (git push origin my-new-feature)
+5. Create new Pull Request
 
 ## License
 
