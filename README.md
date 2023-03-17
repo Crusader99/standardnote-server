@@ -1,5 +1,6 @@
 # Lightweight StandardNotes Server
 
+[![Docker Pulls](https://img.shields.io/docker/pulls/crusaders/standardnote-server)](https://hub.docker.com/r/crusaders/standardnote-server)
 [![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg)](https://pkg.go.dev/github.com/mdouchement/standardfile)
 [![Go Report Card](https://goreportcard.com/badge/github.com/mdouchement/standardfile)](https://goreportcard.com/report/github.com/mdouchement/standardfile)
 [![License](https://img.shields.io/github/license/mdouchement/standardfile.svg)](http://opensource.org/licenses/MIT)
@@ -14,12 +15,12 @@ This server implementation is built with Go and can be deployed in seconds:
 
 - `git clone https://github.com/Crusader99/standardnote-server.git`
 - `cd standardnote-server`
-- `docker-compose up`
+- `docker compose up`
 
 <details>
 <summary>Running without docker-compose is also possible</summary>
 
-`docker run -p 5000:5000 -v ./db:/etc/standardfile/database:z -v ./standardfile.yml:/etc/standardfile/standardfile.yml:z -it $(docker build -q .)`
+`docker run -p 5000:5000 -v $(pwd)/db:/etc/standardfile/database:z -v $(pwd)/standardfile.yml:/etc/standardfile/standardfile.yml:z -it crusaders/standardnote-server`
 
 </details>
 
