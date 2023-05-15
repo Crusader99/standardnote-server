@@ -73,7 +73,7 @@ This server implementation is built with Go and can be deployed in seconds:
 ## Differences to repository from mdouchement
 
 
-* Provides **subscription** premium features out of the box:
+* Provides updated **subscription** premium features out of the box:
 ```
 This option enables paid features in the official StandardNotes client.
 If you want to enables these features, you should consider to
@@ -87,6 +87,8 @@ https://docs.standardnotes.com/self-hosting/subscriptions/
 This project https://github.com/mdouchement/standardfile does not intend to
 conflict with the business model of StandardNotes project or seek compensation.
 ```
+
+* 
 
 * **2FA** (aka `verify_mfa`) implemented using [OTP-Library](https://github.com/pquerna/otp):
 ```
