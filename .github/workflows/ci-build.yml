@@ -18,9 +18,9 @@ jobs:
       with:
         token: ${{ secrets.GH_TOKEN }}
     - name: Earthly installation
-      uses: earthly/actions-setup@v1.0.2
+      uses: earthly/actions-setup@v1.0.7
       with:
-        version: v0.7.20
+        version: v0.7.5
         github-token: ${{ secrets.GH_TOKEN }}
     - name: Earthly version
       run: earthly --version
