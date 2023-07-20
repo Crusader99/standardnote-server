@@ -36,22 +36,6 @@ This server implementation is built with Go and can be deployed in seconds:
 
 ## Differences to repository from mdouchement
 
-
-* Provides updated **subscription** premium features out of the box:
-```
-This option enables paid features in the official StandardNotes client.
-If you want to enables these features, you should consider to
-donate to the StandardNotes project as they say:
-
-Building Standard Notes has high costs. If everyone evaded contributing financially,
-we would no longer be here to continue to build upon and improve these services for you.
-Please consider donating to https://standardnotes.com/donate if you do not plan on purchasing a subscription.
-https://docs.standardnotes.com/self-hosting/subscriptions/
-
-This project https://github.com/mdouchement/standardfile does not intend to
-conflict with the business model of StandardNotes project or seek compensation.
-```
-
 * **2FA** (aka `verify_mfa`) implemented using [OTP-Library](https://github.com/pquerna/otp):
 ```
 Requires enable_subscriptions=true in configuration file.
