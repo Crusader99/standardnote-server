@@ -12,9 +12,9 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/knadh/koanf"
 	"github.com/knadh/koanf/parsers/yaml"
 	"github.com/knadh/koanf/providers/file"
+	"github.com/knadh/koanf/v2"
 	"github.com/mdouchement/standardfile/internal/database"
 	"github.com/mdouchement/standardfile/internal/server"
 	"github.com/pkg/errors"
