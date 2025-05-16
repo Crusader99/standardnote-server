@@ -17,7 +17,7 @@ build:
 
 compile-binary:
     ARG GOARCH
-    FROM --platform=linux/amd64 golang:1.20-alpine
+    FROM --platform=linux/amd64 golang:1.23-alpine
     COPY --dir . /build
     ENV CGO_ENABLED 0
     ENV GO111MODULE on
