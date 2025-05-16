@@ -5,22 +5,38 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/mdouchement/standardfile)](https://goreportcard.com/report/github.com/mdouchement/standardfile)
 [![License](https://img.shields.io/github/license/mdouchement/standardfile.svg)](http://opensource.org/licenses/MIT)
 
-This is a 100% Golang implementation of the [Standard Notes](https://docs.standardnotes.com/specification/sync) protocol. It aims to be **portable** and **lightweight**.
+**Portable** and **lightweight** Golang implementation of the [Standard Notes](https://docs.standardnotes.com/specification/sync) protocol for self-hosting.
 
 ### Running your own server
 
-You can run your own Standard File server, and use it with any SF compatible client (like Standard Notes).
-This allows you to have 100% control of your data.
-This server implementation is built with Go and can be deployed in seconds:
+Create a config file `standardfile.yml`:
+```
+address: "0.0.0.0:5000"
+no_registration: false
+show_real_version: false
+database_path: "/etc/standardfile/database"
+secret_key: jwt-development
+session:
+  secret: paseto-development
+  access_token_ttl: 1440h
+  refresh_token_ttl: 8760h
+enable_subscription: true
+files_server_url: "http://localhost:5000"
+```
 
-- `git clone https://github.com/Crusader99/standardnote-server.git`
-- `cd standardnote-server`
-- `docker compose up`
+Setup requires Docker:
+`docker run -p 5000:5000 -v $(pwd)/db:/etc/standardfile/database:z -v $(pwd)/standardfile.yml:/etc/standardfile/standardfile.yml:z -it crusaders/standardnote-server`
+
+Done! You can register and login using Standard Notes after configuring `http://localhost:5000` as custom server.
+
 
 <details>
-<summary>Running without docker-compose is also possible</summary>
+<summary>Build the image</summary>
 
-`docker run -p 5000:5000 -v $(pwd)/db:/etc/standardfile/database:z -v $(pwd)/standardfile.yml:/etc/standardfile/standardfile.yml:z -it crusaders/standardnote-server`
+- Requires Earthly for containerized build: https://github.com/earthly/earthly
+- `git clone https://github.com/Crusader99/standardnote-server.git`
+- `cd standardnote-server`
+- `earthly +build`
 
 </details>
 
